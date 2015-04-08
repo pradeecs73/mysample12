@@ -103,7 +103,7 @@
         {{#each model}}  
        {{#each retreivedetails}}
           <tr>
-          <td id="taskname{{unbound _id}}">{{taskname}}<td>
+          <td>{{taskname}}<td>
           <td id="taskdescription{{unbound _id}}">{{taskdescription}}</td>
           <td><a href="#" {{action 'edittask' this}}>Edit</a></td>
           <td><a href="#" {{action 'deletetask' this}}>Delete</a></td>

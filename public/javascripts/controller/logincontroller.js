@@ -209,7 +209,6 @@ App.HomeController=Ember.Controller.extend({
           var taskname=params.taskname;
           var taskdescription=params.taskdescription;
           var dynamicid=params._id;
-          $("#taskname"+dynamicid).html("<input type='text' value='"+taskname+"'>");
           $("#taskdescription"+dynamicid).html("<input type='text' value='"+taskdescription+"'>");
          /* bootbox.dialog({
            message :'<table><tr><td>Task Name</td><td><input type="text" id="edittaskname" readonly="readonly" value="'+taskname+'"></td></tr><tr><td>Task Description</td><td><textarea id="edittaskdescription" style="margin-top:10px;">'+taskdescription+'</textarea></td></tr></table>',
