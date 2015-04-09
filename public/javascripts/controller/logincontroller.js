@@ -209,42 +209,10 @@ App.HomeController=Ember.Controller.extend({
           var taskname=params.taskname;
           var taskdescription=params.taskdescription;
           var dynamicid=params._id;
-          $("#taskdescription"+dynamicid).html("<input type='text' value='"+taskdescription+"'>");
-         /* bootbox.dialog({
-           message :'<table><tr><td>Task Name</td><td><input type="text" id="edittaskname" readonly="readonly" value="'+taskname+'"></td></tr><tr><td>Task Description</td><td><textarea id="edittaskdescription" style="margin-top:10px;">'+taskdescription+'</textarea></td></tr></table>',
-           title: "",
-           buttons: {
-           success: {
-           label: "Savechanges",
-           className: "btn-success",
-           callback: function() 
-           {
-
-             var taskname=$("#edittaskname").val();
-             var taskdescription=$("#edittaskdescription").val();
-             var adddetails={};
-            adddetails.taskname=taskname;
-            adddetails.taskdescription=taskdescription;
-
-               edittask(adddetails,function(data){                         
-                     alert(data); 
-                     window.location.reload();
-               });    
-           }
-         },
-         failur: {
-      label: "cancel",
-      className: "btn-success",
-      callback: function() {
-
-
-             }
-          }
-         }
-         }); */
-
+          $("#taskdescription"+dynamicid).html("<input type='text' id='taskdescriptiontext' value='"+taskdescription+"'>");
+          $("#savechanges"+dynamicid).html("<img src='images/save.png' onclick='savechanges(\""+taskname+"\")' alt='user' style='width:20px;height:20px;'>");
+          
       }
-     
   }
   
 });

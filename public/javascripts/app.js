@@ -14,6 +14,17 @@ App.Router.map(function() {
 });
 
 
+ 
+   function savechanges(taskname){
+ 
+	     var taskdescription=$("#taskdescriptiontext").val();
+	     var adddetails={};
+	    adddetails.taskname=taskname;
+	    adddetails.taskdescription=taskdescription;
 
-
-
+	       edittask(adddetails,function(data){                         
+	             alert(data); 
+	             window.location.reload();
+	       });
+    }
+ 
