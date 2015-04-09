@@ -98,14 +98,14 @@
       
     <table width="100%">
       
-      <tr><td><b>Taskname</b></td>
+      <tr><td style='width: 35%;'><b>Taskname</b></td>
           <td><b>Taskdescription</b></td></tr> 
         {{#each model}}  
        {{#each retreivedetails}}
           <tr>
-          <td>{{taskname}}</td>
-          <td id="taskdescription{{unbound _id}}">{{taskdescription}}</td>
-          <td id="savechanges{{unbound _id}}"><img src="images/edit.png" alt="user" {{action 'edittask' this}} style="width:20px;height:20px;"></span></td>
+          <td style='width: 35%;'>{{taskname}}</td>
+          <td style='width: 55%;' id="taskdescription{{unbound _id}}">{{taskdescription}}</td>
+          <td style='width: 5%;' id="savechanges{{unbound _id}}"><img src="images/edit.png" alt="user" {{action 'edittask' this}} style="width:20px;height:20px;"></span></td>
           <td><img src="images/delete.png" alt="user" {{action 'deletetask' this}} style="width:20px;height:20px;"></td>     
         </tr>
        {{/each}}
