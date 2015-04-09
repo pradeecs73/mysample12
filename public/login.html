@@ -104,8 +104,8 @@
        {{#each retreivedetails}}
           <tr>
           <td style='width: 35%;'>{{taskname}}</td>
-          <td style='width: 55%;' id="taskdescription{{unbound _id}}">{{taskdescription}}</td>
-          <td style='width: 5%;' id="savechanges{{unbound _id}}"><img src="images/edit.png" alt="user" {{action 'edittask' this}} style="width:20px;height:20px;"></span></td>
+          <td style='width: 50%;' id="taskdescription{{unbound _id}}">{{taskdescription}}</td>
+          <td style='width: 10%;' id="savechanges{{unbound _id}}"><img src="images/edit.png" alt="user" {{action 'edittask' this}} style="width:20px;height:20px;"></span></td>
           <td><img src="images/delete.png" alt="user" {{action 'deletetask' this}} style="width:20px;height:20px;"></td>     
         </tr>
        {{/each}}

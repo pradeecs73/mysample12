@@ -210,7 +210,7 @@ App.HomeController=Ember.Controller.extend({
           var taskdescription=params.taskdescription;
           var dynamicid=params._id;
           $("#taskdescription"+dynamicid).html("<input type='text' id='taskdescriptiontext' value='"+taskdescription+"'>");
-          $("#savechanges"+dynamicid).html("<img src='images/save.png' onclick='savechanges(\""+taskname+"\")' alt='user' style='width:20px;height:20px;'>");
+          $("#savechanges"+dynamicid).html("<img src='images/save.png' onclick='savechanges(\""+taskname+"\")' alt='user' style='width:20px;height:20px;'>&nbsp;&nbsp;<a href='javascript:void(0)' onclick='canceledit()'>cancel</a>");
           
       }
   }

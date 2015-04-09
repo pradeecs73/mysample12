@@ -27,4 +27,8 @@ App.Router.map(function() {
 	             window.location.reload();
 	       });
     }
+
+    function canceledit(){
+        window.location.reload();      
+    }
  
