@@ -60,7 +60,7 @@
   <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" id="main-navbar">
       
            <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
+        
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
             <span class="sr-only">Toggle navigation</span>
@@ -71,14 +71,12 @@
           <a class="navbar-brand" href="#">The Main Page</a>
         </div>
 
-      
-        <!-- Collect the nav links, forms, and other content for toggling -->
+    
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">            
-           {{#each model}}
           <ul class="nav navbar-nav navbar-right user-menu">        
             <li class="dropdown">             
                 <a class="dropdown-toggle user-menu" data-toggle="dropdown">
-                    <img src="images/avatar.png" alt="user">&nbsp;&nbsp;<span>{{username}}</span>
+                    <img src="images/avatar.png" alt="user">&nbsp;&nbsp;
                 </a>
               <ul class="dropdown-menu" role="menu">
                 <li {{action 'changepassword'}}>Change Password</li>                               
@@ -86,11 +84,10 @@
               </ul>
             </li>
           </ul>
-          {{/each}}
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
+        </div>
+      </div>
 
-    </nav><!--/.navbar navbar-inverse-->
+    </nav>
 
      
     <div class="container-fluid">
@@ -100,8 +97,7 @@
       
       <tr><td style='width: 35%;'><b>Taskname</b></td>
           <td><b>Taskdescription</b></td></tr> 
-        {{#each model}}  
-       {{#each retreivedetails}}
+       {{#each controller.paginatedContent}}
           <tr>
           <td style='width: 35%;'>{{taskname}}</td>
           <td style='width: 50%;' id="taskdescription{{unbound _id}}">{{taskdescription}}</td>
@@ -109,17 +105,26 @@
           <td><img src="images/delete.png" alt="user" {{action 'deletetask' this}} style="width:20px;height:20px;"></td>     
         </tr>
        {{/each}}
-       {{/each}}
        
      </table>
 
     </div>
+
+ {{#view App.PreviousnextView}}
+
+<ul class="pagination gui-text">
+<li id="prev" name="prev">{{#link-to "home.page" prevPage }}< Prev{{/link-to}}</li>
+{{#each pages}}
+    {{view App.PaginationView contentBinding="this"}}
+  {{/each}}
+<li id="next" name="next">{{#link-to "home.page" nextPage }}Next >{{/link-to}}</li>
+</ul>
+
+{{/view}}
       
 
 </script>
-<script>
 
-</script>
   <script type="text/x-handlebars" id="forgotpassword">
       <div class="container">
       <form class="form-signin" role="form">
@@ -140,6 +145,14 @@
       </form>
       </div>
    </script> 
+
+<script type="text/x-handlebars" id="pagination">
+      {{#with view}}
+      {{#link-to 'home.page' page}}
+        {{content.page_id}}
+      {{/link-to}}
+      {{/with}}
+</script>
    
   <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
   <script src="javascripts/libs/jquery-1.10.2.js"></script>
@@ -147,8 +160,10 @@
   <script src="javascripts/libs/handlebars-1.1.2.js"></script>
   <script src="javascripts/libs/ember-1.5.1.js"></script>
   <script src="javascripts/libs/bootbox.min.js"></script>
+  <script src="javascripts/pagination.js"></script>
   <script src="javascripts/app.js"></script>
   <script src="javascripts/model/routes.js"></script>
+  <script src="javascripts/view/homeview.js"></script>
   <script src="javascripts/restcallservices.js"></script>
   <script src="javascripts/controller/logincontroller.js"></script>
   </body>

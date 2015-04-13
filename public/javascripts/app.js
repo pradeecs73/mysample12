@@ -5,16 +5,20 @@ App = Ember.Application.create({
   }
 });
 
+
+
 App.Router.map(function() {
    this.resource('signin');
    this.resource('signup');
-   this.resource('home');
+   this.resource("home",function() {
+       this.route("page", { path: "page/:page_id" });
+    });
    this.resource('forgotpassword');
    this.resource('changepassword');
+   this.resource("pagination");
 });
 
 
- 
    function savechanges(taskname){
  
 	     var taskdescription=$("#taskdescriptiontext").val();
@@ -32,3 +36,4 @@ App.Router.map(function() {
         window.location.reload();      
     }
  
+

@@ -97,9 +97,9 @@ signinclick:function()
 
 });
 
-App.HomeController=Ember.Controller.extend({
-
-  actions: {
+App.HomeController = Ember.ArrayController.extend(Ember.PaginationMixin, {
+    itemsPerPage: 2,
+     actions: {
       signout : function(){
          var that=this;  
          document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
@@ -214,7 +214,6 @@ App.HomeController=Ember.Controller.extend({
           
       }
   }
-  
 });
 
 App.ForgotpasswordController=Ember.Controller.extend({
