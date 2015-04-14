@@ -213,9 +213,9 @@ App.HomeController = Ember.ArrayController.extend(Ember.PaginationMixin, {
           $("#editchanges"+dynamicid+"").css("display", "none");
           $("#savechanges"+dynamicid+"").css("display", "block");
           
-        $( "label."+editableclass+"" ).each(function() {
-           var textval=$(this).text();
-            $( "label."+editableclass+"" ).replaceWith("<input type='text' class='"+editableclass+"' value='"+textval+"'>" );
+         $("."+editableclass+"").each(function (index) {
+           var textval=$(this).text();;
+            $(this).replaceWith("<input type='text' class='"+editableclass+"' value='"+textval+"'>" );
         }); 
           
       },
@@ -236,7 +236,7 @@ App.HomeController = Ember.ArrayController.extend(Ember.PaginationMixin, {
             }    
             var value=$(this).val();
        
-           $( "."+editableclass+"" ).replaceWith("<label class='"+editableclass+"'>"+value+"</label>");
+           $(this).replaceWith("<label class='"+editableclass+"'>"+value+"</label>");
 
          });
 
