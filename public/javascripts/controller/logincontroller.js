@@ -228,9 +228,6 @@ App.HomeController = Ember.ArrayController.extend(Ember.PaginationMixin, {
           var editableclass="editable"+dynamicid;
           adddetails.taskname=taskname;
 
-          $("#editchanges"+dynamicid+"").css("display", "block");
-          $("#savechanges"+dynamicid+"").css("display", "none");
-
          $("."+editableclass+"").each(function (index) {
             
             if(index == 0)
@@ -244,8 +241,9 @@ App.HomeController = Ember.ArrayController.extend(Ember.PaginationMixin, {
          });
 
          edittask(adddetails,function(data){                        
-               alert(data);           
-             
+               alert(data);  
+             $("#editchanges"+dynamicid+"").css("display", "block");
+             $("#savechanges"+dynamicid+"").css("display", "none");                 
          });
  
       }
