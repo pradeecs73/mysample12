@@ -19,3 +19,4 @@ App.PreviousnextView = Ember.View.extend({
 
     }
 });
+

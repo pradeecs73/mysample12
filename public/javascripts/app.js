@@ -19,20 +19,21 @@ App.Router.map(function() {
 });
 
 
-   function savechanges(taskname){
+   /*function savechanges(taskname,dynamicid){
  
-	     var taskdescription=$("#taskdescriptiontext").val();
+	     var taskdescription=$("#taskdescriptiontext"+dynamicid).val();
 	     var adddetails={};
 	    adddetails.taskname=taskname;
 	    adddetails.taskdescription=taskdescription;
 
-	       edittask(adddetails,function(data){                         
-	             alert(data); 
-	             window.location.reload();
+	       edittask(adddetails,function(data){                        
+	             alert(data);           
+	            window.location.reload();
 	       });
-    }
+    }*/
 
     function canceledit(){
+
         window.location.reload();      
     }
  

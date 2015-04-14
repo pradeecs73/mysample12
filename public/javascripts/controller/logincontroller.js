@@ -206,12 +206,48 @@ App.HomeController = Ember.ArrayController.extend(Ember.PaginationMixin, {
       },
       edittask:function(params)
       {
-          var taskname=params.taskname;
-          var taskdescription=params.taskdescription;
+
           var dynamicid=params._id;
-          $("#taskdescription"+dynamicid).html("<input type='text' id='taskdescriptiontext' value='"+taskdescription+"'>");
-          $("#savechanges"+dynamicid).html("<img src='images/save.png' onclick='savechanges(\""+taskname+"\")' alt='user' style='width:20px;height:20px;'>&nbsp;&nbsp;<a href='javascript:void(0)' onclick='canceledit()'>cancel</a>");
+          var editableclass="editable"+dynamicid;
+
+          $("#editchanges"+dynamicid+"").css("display", "none");
+          $("#savechanges"+dynamicid+"").css("display", "block");
           
+        $( "label."+editableclass+"" ).each(function() {
+           var textval=$(this).text();
+            $( "label."+editableclass+"" ).replaceWith("<input type='text' class='"+editableclass+"' value='"+textval+"'>" );
+        }); 
+          
+      },
+      savetask:function(params)
+      {
+         var adddetails={};
+
+          var dynamicid=params._id;
+          var taskname=params.taskname;
+          var editableclass="editable"+dynamicid;
+          adddetails.taskname=taskname;
+
+          $("#editchanges"+dynamicid+"").css("display", "block");
+          $("#savechanges"+dynamicid+"").css("display", "none");
+
+         $("."+editableclass+"").each(function (index) {
+            
+            if(index == 0)
+            {
+              adddetails.taskdescription=$(this).val();
+            }    
+            var value=$(this).val();
+       
+           $( "."+editableclass+"" ).replaceWith("<label class='"+editableclass+"'>"+value+"</label>");
+
+         });
+
+         edittask(adddetails,function(data){                        
+               alert(data);           
+             
+         });
+ 
       }
   }
 });

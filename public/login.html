@@ -56,7 +56,7 @@
 </script>
 
 <script type="text/x-handlebars" id="home">
-
+  
   <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" id="main-navbar">
       
            <div class="container-fluid">
@@ -76,7 +76,7 @@
           <ul class="nav navbar-nav navbar-right user-menu">        
             <li class="dropdown">             
                 <a class="dropdown-toggle user-menu" data-toggle="dropdown">
-                    <img src="images/avatar.png" alt="user">&nbsp;&nbsp;
+                    <img src="images/avatar.png" alt="user">&nbsp;&nbsp;  
                 </a>
               <ul class="dropdown-menu" role="menu">
                 <li {{action 'changepassword'}}>Change Password</li>                               
@@ -100,8 +100,8 @@
        {{#each controller.paginatedContent}}
           <tr>
           <td style='width: 35%;'>{{taskname}}</td>
-          <td style='width: 50%;' id="taskdescription{{unbound _id}}">{{taskdescription}}</td>
-          <td style='width: 10%;' id="savechanges{{unbound _id}}"><img src="images/edit.png" alt="user" {{action 'edittask' this}} style="width:20px;height:20px;"></span></td>
+          <td style='width: 50%;'><label class="editable{{unbound _id}}">{{taskdescription}}</label></td>
+          <td style='width: 10%;'><img src="images/edit.png" alt="user" id="editchanges{{unbound _id}}" {{action 'edittask' this}} style="width:20px;height:20px;"><img src='images/save.png' alt='user' id="savechanges{{unbound _id}}" style='width:20px;height:20px;display:none;' {{action 'savetask' this}}></td>
           <td><img src="images/delete.png" alt="user" {{action 'deletetask' this}} style="width:20px;height:20px;"></td>     
         </tr>
        {{/each}}
