@@ -59,22 +59,10 @@ App.HomeRoute = Ember.Route.extend({
         this.transitionTo("home");
       }
 
-   return $.getJSON( "http://localhost:3000/retreivetask", function( data ) {
-         
-      });
-
   }
 
 });
 
-App.HomePageRoute = Ember.Route.extend({
-    model: function(params) {
-        return Ember.Object.create({id: params.page_id});
-    },
-    setupController: function(controller, model) {
-        this.controllerFor('home').set('selectedPage', model.get('id'));
-    }
-});
 
 App.ForgotpasswordRoute = Ember.Route.extend({
   afterModel:function(){

@@ -56,7 +56,7 @@
 </script>
 
 <script type="text/x-handlebars" id="home">
-  
+ 
   <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" id="main-navbar">
       
            <div class="container-fluid">
@@ -96,8 +96,8 @@
     <table width="100%">
       
       <tr><td style='width: 35%;'><b>Taskname</b></td>
-          <td><b>Taskdescription</b></td></tr> 
-       {{#each controller.paginatedContent}}
+          <td><b>Taskdescription</b></td></tr>     
+       {{#each paginatedContent}}
           <tr>
           <td style='width: 35%;'>{{taskname}}</td>
           <td style='width: 50%;'><label class="editable{{unbound _id}}">{{taskdescription}}</label></td>
@@ -110,19 +110,21 @@
 
     </div>
 
- {{#view App.PreviousnextView}}
-
-<ul class="pagination gui-text">
-<li id="prev" name="prev">{{#link-to "home.page" prevPage }}< Prev{{/link-to}}</li>
-{{#each pages}}
-    {{view App.PaginationView contentBinding="this"}}
-  {{/each}}
-<li id="next" name="next">{{#link-to "home.page" nextPage }}Next >{{/link-to}}</li>
-</ul>
-
-{{/view}}
+  <div id="navContainer">
+              <ul>
+              {{#if prevPage}}
+              <li><a href="#" {{action "selectPrevPage"}}>Prev</a></li>
+              {{/if}}              
+            
+              {{#each pages}}
+                <li><a href="#" {{action 'goToPage' number}}>{{number}}</a></li>
+              {{/each}}
+               {{#if nextPage}}
+              <li><a href="#" {{action "selectNextPage"}}>Next</a></li>
+              {{/if}}
+              </ul>
+        </div>
       
-
 </script>
 
   <script type="text/x-handlebars" id="forgotpassword">
@@ -160,7 +162,6 @@
   <script src="javascripts/libs/handlebars-1.1.2.js"></script>
   <script src="javascripts/libs/ember-1.5.1.js"></script>
   <script src="javascripts/libs/bootbox.min.js"></script>
-  <script src="javascripts/pagination.js"></script>
   <script src="javascripts/app.js"></script>
   <script src="javascripts/model/routes.js"></script>
   <script src="javascripts/view/homeview.js"></script>

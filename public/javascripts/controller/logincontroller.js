@@ -97,9 +97,90 @@ signinclick:function()
 
 });
 
-App.HomeController = Ember.ArrayController.extend(Ember.PaginationMixin, {
-    itemsPerPage: 2,
+App.HomeController = Ember.Controller.extend({
+    page:1,
+    pagelimit:7, 
+  paginatedContent:(function(){
+       var obj= fngetEmpDetails();  
+       var start = (this.get('page') - 1) * this.get('pagelimit');
+       var last =  this.get('pagelimit');    
+       return obj.responseJSON.splice(start,last);
+      }).property('page','pagelimit'),
+totalpage:(function(){     
+       var obj= fngetEmpDetails();  
+       var smodel=obj.responseJSON;
+   return Math.ceil(smodel.length/this.get('pagelimit'));
+}).property('pagelimit'),
+
+ pages: (function() {
+    var collection = new Array();
+    for(var i = 0; i < this.get('totalpage'); i++) {
+      var objArry={number:i+1};
+      collection.push(objArry);
+    }
+    return collection;      
+  }).property('totalpage'),
+
+  prevPage: (function() {
+    var page = this.get('page');
+    var totalPages = this.get('totalpage');
+    
+    if(page > 1 && totalPages > 1) {
+      return page-1;
+    } else {
+      return null;
+    }
+  }).property('page', 'totalpage'),
+   nextPage: (function() {
+    var page = this.get('page');
+    var totalPages = this.get('totalpage');
+    if(page < totalPages && totalPages > 1) {
+      return page+1;
+    } else {
+      return null;
+    }
+  }).property('page', 'totalpage'),
      actions: {
+      goToPage:function(number){
+          this.set('page',number);
+          var obj=fngetEmpDetails();
+          var smodel=obj.responseJSON;
+          var start = (this.get('page') - 1) * this.get('pagelimit');
+          var last = this.get('pagelimit');
+          this.set('paginatedContent',smodel.splice(start,last));
+       },
+    selectPrevPage: function() {
+          var page = this.get('page');
+          var totalPages = this.get('totalpage');
+          if(page > 1 && totalPages > 1) {
+           this.set('page',page-1);
+          }
+          else
+            this.set('page',1);
+
+        var obj=fngetEmpDetails();
+        var smodel=obj.responseJSON;
+          var start = (this.get('page') - 1) * this.get('pagelimit');
+          var last = this.get('pagelimit');
+          this.set('paginatedContent',smodel.splice(start,last));
+      },
+       selectNextPage: function() {
+        
+        var page = this.get('page');
+        var totalPages = this.get('totalpage');
+    
+        if(page < totalPages && totalPages > 1) {
+           this.set('page',page+1);
+        }
+        else{
+           this.set('page',1);
+           }
+         var obj=fngetEmpDetails();
+         var smodel=obj.responseJSON; 
+          var start = (this.get('page') - 1) * this.get('pagelimit');
+          var last = this.get('pagelimit');
+          this.set('paginatedContent',smodel.splice(start,last));
+      },
       signout : function(){
          var that=this;  
          document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
@@ -148,7 +229,7 @@ App.HomeController = Ember.ArrayController.extend(Ember.PaginationMixin, {
                    else
                     {
                       alert("Task succusfully added");
-                      window.location.reload();       
+                       window.location.reload();        
                     }
 
                  });           
@@ -170,6 +251,7 @@ App.HomeController = Ember.ArrayController.extend(Ember.PaginationMixin, {
       },
       deletetask:function(params)
       {
+         var that=this;
          var taskname=params.taskname;
          bootbox.dialog({
            message :'Are you sure you want to delete this task',
@@ -186,7 +268,7 @@ App.HomeController = Ember.ArrayController.extend(Ember.PaginationMixin, {
                
                deletetask(adddetails,function(data){              
                          alert("Task deleted");
-                         window.location.reload();
+                        window.location.reload();  
                });
 
            }
@@ -206,7 +288,7 @@ App.HomeController = Ember.ArrayController.extend(Ember.PaginationMixin, {
       },
       edittask:function(params)
       {
-
+          
           var dynamicid=params._id;
           var editableclass="editable"+dynamicid;
 
@@ -214,13 +296,16 @@ App.HomeController = Ember.ArrayController.extend(Ember.PaginationMixin, {
           $("#savechanges"+dynamicid+"").css("display", "block");
           
          $("."+editableclass+"").each(function (index) {
-           var textval=$(this).text();;
-            $(this).replaceWith("<input type='text' class='"+editableclass+"' value='"+textval+"'>" );
+           var textval=$(this).text();
+
+            $(this).replaceWith("<input type='text' class='"+editableclass+"' value='"+textval+"'>" ); 
+          
         }); 
           
       },
       savetask:function(params)
       {
+         var that=this; 
          var adddetails={};
 
           var dynamicid=params._id;
@@ -241,9 +326,10 @@ App.HomeController = Ember.ArrayController.extend(Ember.PaginationMixin, {
          });
 
          edittask(adddetails,function(data){                        
-               alert(data);  
-             $("#editchanges"+dynamicid+"").css("display", "block");
-             $("#savechanges"+dynamicid+"").css("display", "none");                 
+               alert(data); 
+               $("#editchanges"+dynamicid+"").css("display", "block");
+               $("#savechanges"+dynamicid+"").css("display", "none");
+                                 
          });
  
       }
@@ -350,3 +436,29 @@ function setCookie(cname,cvalue,exdays) {
     var expires = "expires=" + d.toGMTString();
     document.cookie = cname+"="+cvalue+"; "+expires;
 }
+
+function fngetEmpDetails(){
+  try
+  { 
+       var obj = $.ajax({
+              url: "http://localhost:3000/retreivetask",
+              type: 'GET',
+              dataType:"json", 
+              async:false,
+              success: function( data){
+              
+              },
+
+              error: function(data){
+                 
+              }
+          }); 
+      return obj;
+
+  }
+  catch(ex)
+  { 
+    console.log(ex)
+  }
+
+ }

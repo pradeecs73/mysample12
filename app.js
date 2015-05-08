@@ -23,6 +23,7 @@ app.post('/forgotpassword', services.forgotpassword);
 app.post('/changepassword', services.changepassword);
 app.post('/addtask', services.addtask);
 app.get('/retreivetask', services.retreivetask);
+app.get('/geteducationdetails', services.geteducationdetails);
 app.post('/deletetask', services.deletetask);
 app.post('/edittask', services.edittask);
 

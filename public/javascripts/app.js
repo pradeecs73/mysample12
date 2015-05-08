@@ -10,27 +10,11 @@ App = Ember.Application.create({
 App.Router.map(function() {
    this.resource('signin');
    this.resource('signup');
-   this.resource("home",function() {
-       this.route("page", { path: "page/:page_id" });
-    });
+   this.resource("home");
    this.resource('forgotpassword');
    this.resource('changepassword');
    this.resource("pagination");
 });
-
-
-   /*function savechanges(taskname,dynamicid){
- 
-	     var taskdescription=$("#taskdescriptiontext"+dynamicid).val();
-	     var adddetails={};
-	    adddetails.taskname=taskname;
-	    adddetails.taskdescription=taskdescription;
-
-	       edittask(adddetails,function(data){                        
-	             alert(data);           
-	            window.location.reload();
-	       });
-    }*/
 
     function canceledit(){
 
