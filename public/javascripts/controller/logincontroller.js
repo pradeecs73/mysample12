@@ -229,7 +229,22 @@ totalpage:(function(){
                    else
                     {
                       alert("Task succusfully added");
-                       window.location.reload();        
+                     var obj= fngetEmpDetails(); 
+                     var NewTotal=Math.ceil(obj.responseJSON.length/that.get('pagelimit'));
+                     that.set('totalpage',NewTotal);
+                    if(obj.responseJSON.length <=that.get('pagelimit')){
+                      that.set('page',0);
+                      that.set('paginatedContent',obj.responseJSON);
+                    }
+                    else
+                    {
+                        that.set('page',1);
+                        var start = (that.get('page') - 1) * that.get('pagelimit');
+                        var last = start + that.get('pagelimit');
+                        that.set('paginatedContent',obj.responseJSON.splice(start,last));
+                    }
+
+                      // window.location.reload();        
                     }
 
                  });           
@@ -268,7 +283,23 @@ totalpage:(function(){
                
                deletetask(adddetails,function(data){              
                          alert("Task deleted");
-                        window.location.reload();  
+                     var obj= fngetEmpDetails(); 
+                     var NewTotal=Math.ceil(obj.responseJSON.length/that.get('pagelimit'));
+                     that.set('totalpage',NewTotal);
+                    if(obj.responseJSON.length <=that.get('pagelimit')){
+                      //this.set('nextPage',false);
+                      that.set('page',0);
+                      that.set('paginatedContent',obj.responseJSON);
+                    }
+                    else
+                    {
+                        that.set('page',1);
+                        var start = (that.get('page') - 1) * that.get('pagelimit');
+                        var last = start + that.get('pagelimit');
+                        //this.set('nextPage',false);
+                        that.set('paginatedContent',obj.responseJSON.splice(start,last));
+                    }
+ 
                });
 
            }

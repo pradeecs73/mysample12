@@ -96,7 +96,8 @@
     <table width="100%">
       
       <tr><td style='width: 35%;'><b>Taskname</b></td>
-          <td><b>Taskdescription</b></td></tr>     
+          <td><b>Taskdescription</b></td></tr>
+          {{#if totalpage}}     
        {{#each paginatedContent}}
           <tr>
           <td style='width: 35%;'>{{taskname}}</td>
@@ -105,6 +106,11 @@
           <td><img src="images/delete.png" alt="user" {{action 'deletetask' this}} style="width:20px;height:20px;"></td>     
         </tr>
        {{/each}}
+       {{else}}
+       <tr><td>
+          <span>No data available</span>
+       </td></tr> 
+       {{/if}}
        
      </table>
 
